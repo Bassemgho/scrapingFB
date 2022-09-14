@@ -68,9 +68,10 @@ async def scrape_profiles(keyword):
 
     return {"profile":profile}
 
-@app.get("/getpostsdatabase")
-async def test():
-    res = engine.execute( "SELECT TOP 1 * FROM [dbo].[rawdata3] ORDER BY NEWID() ").fetchall()
+@app.get("/getpostsdatabase/{np}")
+async def test(np):
+    n= int(np)
+    res = engine.execute( "SELECT TOP {} * FROM [dbo].[rawdata3] ORDER BY NEWID() ".format(n)).fetchall()
     return {"result":res}
 
     
